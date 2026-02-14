@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hehe... bị ôm roi nha</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#ffebee;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, "Segoe UI", sans-serif;
+  overflow:hidden;
+  position:relative;
+}
+
+/* GIF */
+.gif-container{
+  position:relative;
+  width:180px;
+  height:180px;
+  text-align:center;
+  z-index:2;
+}
+
+.gif-container img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:12px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* TEXT */
+.text-overlay{
+  position:absolute;
+  top:-13%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:#000;
+  font-size:1.55rem;
+  font-weight:bold;
+  text-align:center;
+  opacity:0;
+  transition:all 0.8s ease;
+  white-space:nowrap;
+  text-shadow:
+    1px 1px 3px rgba(255,255,255,0.9),
+    -1px -1px 3px rgba(255,255,255,0.9),
+    1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.text-overlay.visible{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1.1);
+}
+
+#text2{ font-size:1.45rem; }
+#text3{ font-size:1.7rem; color:#e91e63; }
+
+/* HEART */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  color:#ff4d6d;
+  font-size:20px;
+  animation:floatUp linear forwards;
+  z-index:1;
+}
+
+@keyframes floatUp{
+  to{
+    transform:translateY(-110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NHẠC NỀN -->
+<audio autoplay loop>
+  <source src="nhac.mp3" type="audio/mpeg">
+</audio>
+
+<div class="gif-container">
+  <img src="anh/hon.gif" alt="GIF animation">
+
+  <div class="text-overlay" id="text1">emm ơii 😄</div>
+  <div class="text-overlay" id="text2">Cho anh hun một cái 😘</div>
+  <div class="text-overlay" id="text3">yêu em 😍</div>
+</div>
+
+<script>
+const text1 = document.getElementById('text1');
+const text2 = document.getElementById('text2');
+const text3 = document.getElementById('text3');
+
+/* HIỆN CHỮ */
+setTimeout(()=>{ text1.classList.add('visible'); },300);
+
+setTimeout(()=>{
+  text1.classList.remove('visible');
+  setTimeout(()=>{ text2.classList.add('visible'); },800);
+},2200);
+
+setTimeout(()=>{
+  text2.classList.remove('visible');
+  setTimeout(()=>{
+    text3.classList.add('visible');
+    setTimeout(()=>{
+      window.location.href="lichanh.html";
+    },1400);
+  },800);
+},4600);
+
+/* TẠO TIM BAY */
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (Math.random()*20 + 15) + "px";
+  heart.style.animationDuration = (Math.random()*3 + 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },6000);
+}
+
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
